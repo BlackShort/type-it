@@ -2,20 +2,69 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Light Theme */
+.light {
+  --background: 0 0% 100%;
+  --foreground: 222.2 84% 4.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 222.2 84% 4.9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 222.2 84% 4.9%;
+  --primary: 221.2 83.2% 53.3%;
+  --primary-foreground: 210 40% 98%;
+  --secondary: 210 40% 96.1%;
+  --secondary-foreground: 222.2 47.4% 11.2%;
+  --muted: 210 40% 96.1%;
+  --muted-foreground: 215.4 16.3% 44%;
+  --accent: 210 40% 96.1%;
+  --accent-foreground: 222.2 47.4% 11.2%;
+  --destructive: 0 72% 51%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 214.3 31.8% 91.4%;
+  --input: 214.3 31.8% 91.4%;
+  --ring: 221.2 83.2% 53.3%;
+  --radius: 0.5rem;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Dark Theme */
+.dark {
+  --background: 210 10% 10%;
+  /* Very Dark Gray */
+  --foreground: 0 0% 95%;
+  /* Light Gray */
+  --card: 210 10% 15%;
+  /* Dark Gray */
+  --card-foreground: 0 0% 95%;
+  /* Light Gray */
+  --popover: 210 10% 15%;
+  /* Dark Gray */
+  --popover-foreground: 0 0% 95%;
+  /* Light Gray */
+  --primary: 200 100% 60%;
+  /* Bright Blue */
+  --primary-foreground: 210 10% 10%;
+  /* Very Dark Gray */
+  --secondary: 160 100% 50%;
+  /* Bright Green */
+  --secondary-foreground: 210 10% 10%;
+  /* Very Dark Gray */
+  --muted: 210 10% 25%;
+  /* Mid Gray */
+  --muted-foreground: 210 10% 60%;
+  /* Light Gray */
+  --accent: 300 100% 60%;
+  /* Bright Magenta */
+  --accent-foreground: 210 10% 10%;
+  /* Very Dark Gray */
+  --destructive: 0 100% 60%;
+  /* Bright Red */
+  --destructive-foreground: 210 10% 10%;
+  /* Very Dark Gray */
+  --border: 210 10% 25%;
+  /* Mid Gray */
+  --input: 210 10% 15%;
+  /* Dark Gray */
+  --ring: 200 100% 60%;
+  /* Bright Blue */
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-}
