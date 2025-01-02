@@ -30,9 +30,9 @@ export function Navbar({ navItems = [
         <div className="flex items-center space-x-4">
           <div className="hidden md:flex space-x-4">
             {navItems.map((item) => (
-              <Link 
-                key={item.href} 
-                href={item.href} 
+              <Link
+                key={item.href}
+                href={item.href}
                 className="text-foreground hover:text-primary"
               >
                 {item.label}
@@ -53,19 +53,19 @@ export function Navbar({ navItems = [
             <SheetContent side="right" className="w-[300px] sm:w-[400px]">
               <nav className="flex flex-col space-y-4 mt-4">
                 {navItems.map((item) => (
-                  <Link 
-                    key={item.href} 
-                    href={item.href} 
+                  <Link
+                    key={item.href}
+                    href={item.href}
                     className="block w-full py-2 px-4 text-foreground hover:text-primary hover:bg-accent rounded-md transition-colors"
                   >
                     {item.label}
                   </Link>
                 ))}
                 <div className="pt-4 mt-4 border-t border-border">
-                  <ThemeToggle className="w-full justify-start" />
+                  <ThemeToggle />
                 </div>
                 <div className="pt-4">
-                  <AuthStatus className="w-full" />
+                  <AuthStatus />
                 </div>
               </nav>
             </SheetContent>

@@ -7,8 +7,9 @@ export interface Lesson {
 }
 
 export interface Drill {
-  type: 'key' | 'word' | 'paragraph'
-  content: string | string[]
+  type: 'key' | 'word' | 'paragraph';
+  content: string | string[];
+  generateMoreContent?: () => string[] | string;
 }
 
 // Keep the existing interfaces if they're still needed elsewhere

@@ -1,18 +1,23 @@
+"use client"
+
 import React, { useState, useEffect, useCallback, useRef } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
 import { Progress } from "@/components/ui/progress"
 import { OnScreenKeyboard } from "@/components/OnScreenKeyboard"
 import { ScoreScreen } from "@/components/ScoreScreen"
 import { DrillControls } from "@/components/DrillControls"
+import { DrillConfig } from "@/components/DrillConfigModal"
 import { generateSequence } from "@/utils/sequenceGenerator"
+import { TypingSequenceButtons } from './TypingSequenceButtons'
 
-interface TypingPracticeProps {
-  lessonTitle: string
-  onComplete: () => void
-  onCancel: () => void
-  config: DrillConfig
-  lessonKeys: string[]
+export interface TypingPracticeProps {
+  lessonTitle: string;
+  sequence: string[]; // Ensure this is defined
+  onComplete: () => void;
+  onCancel: () => void;
+  config: DrillConfig;
+  generateMoreContent?: () => string | string[];
+  lessonKeys: string[];
 }
 
 export function TypingPractice({ lessonTitle, onComplete, onCancel, config, lessonKeys }: TypingPracticeProps) {
@@ -46,7 +51,7 @@ export function TypingPractice({ lessonTitle, onComplete, onCancel, config, less
     setIsMac(navigator.platform.toUpperCase().indexOf('MAC') >= 0)
     generateNewSequence()
     setStartTime(Date.now()) // Start the timer immediately
-  }, [])
+  }, [startTime, isMac, lessonKeys])
 
   const generateNewSequence = useCallback(() => {
     const newSequence = generateSequence(lessonKeys, 8).split('')
@@ -203,33 +208,3 @@ export function TypingPractice({ lessonTitle, onComplete, onCancel, config, less
     </div>
   )
 }
-
-export function TypingSequenceButtons({ sequence, currentIndex, typedKeys }: TypingSequenceButtonsProps) {
-  const rows = [sequence.slice(0, 4), sequence.slice(4, 8)]
-
-  return (
-    <div className="grid grid-cols-2 gap-4">
-      {rows.map((row, rowIndex) => (
-        <div key={rowIndex} className="flex justify-between">
-          {row.map((char, index) => {
-            const globalIndex = rowIndex * 4 + index
-            let buttonClass = "flex-1 h-12 text-lg font-bold mx-1"
-            if (globalIndex === currentIndex) {
-              buttonClass += " bg-primary text-primary-foreground ring-2 ring-offset-2 ring-primary"
-            } else if (globalIndex < currentIndex) {
-              buttonClass += typedKeys[globalIndex] === char ? " bg-secondary text-secondary-foreground" : " bg-destructive text-destructive-foreground"
-            } else {
-              buttonClass += " bg-muted text-muted-foreground"
-            }
-            return (
-              <Button key={index} className={buttonClass} disabled>
-                {char === ' ' ? 'Space' : char}
-              </Button>
-            )
-          })}
-        </div>
-      ))}
-    </div>
-  )
-}
-

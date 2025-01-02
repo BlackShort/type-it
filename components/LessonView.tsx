@@ -1,15 +1,17 @@
+"use client"
+
 import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Lesson, Drill, DrillConfig } from "@/types/lessons"
+import { Lesson, Drill } from "@/types/lessons"
 import { TypingPractice } from "@/components/TypingPractice"
 import { WordDrill } from "@/components/WordDrill"
 import { ParagraphDrill } from "@/components/ParagraphDrill"
 import { ChevronLeft, ChevronRight, Keyboard, Type, FileText } from 'lucide-react'
 import { lessons } from "@/data/lessons"
-import { DrillConfigModal } from "@/components/DrillConfigModal"
+import { DrillConfigModal, DrillConfig } from "@/components/DrillConfigModal"
 import { generateSequence } from "@/utils/sequenceGenerator" // Updated import path
 
 interface LessonViewProps {
@@ -19,7 +21,7 @@ interface LessonViewProps {
   onPrevious: () => void
 }
 
-export function LessonView({ lesson, onComplete, onNext, onPrevious }: LessonViewProps) {
+export function LessonView({ lesson }: LessonViewProps) {
   const [selectedDrill, setSelectedDrill] = useState<Drill | null>(null)
   const [drillConfig, setDrillConfig] = useState<DrillConfig | null>(null)
   const router = useRouter()
@@ -59,6 +61,14 @@ export function LessonView({ lesson, onComplete, onNext, onPrevious }: LessonVie
     }
   }
 
+  const defaultDrillConfig: DrillConfig = {
+    complexity: 'easy', // Default to the simplest complexity
+    duration: 5, // Default duration in minutes, adjust as needed
+    generationType: 'auto', // Default to automatic generation
+    level: 'beginner', // Default to the starting level
+  };
+
+
   const renderDrill = () => {
     if (!selectedDrill) return null
 
@@ -67,13 +77,18 @@ export function LessonView({ lesson, onComplete, onNext, onPrevious }: LessonVie
         return (
           <TypingPractice
             lessonTitle={`${lesson.title} - Key Practice`}
-            sequence={selectedDrill.content.split('')}
+            sequence={
+              typeof selectedDrill.content === 'string'
+                ? selectedDrill.content.split('')
+                : selectedDrill.content
+            }
             onComplete={handleDrillComplete}
             onCancel={() => setSelectedDrill(null)}
-            config={drillConfig}
+            config={drillConfig ?? defaultDrillConfig}
             generateMoreContent={selectedDrill.generateMoreContent}
             lessonKeys={lesson.keys}
           />
+
         )
       case 'word':
         return (
@@ -135,18 +150,18 @@ export function LessonView({ lesson, onComplete, onNext, onPrevious }: LessonVie
                   <CardContent className="flex flex-col items-center p-6">
                     {getDrillIcon(drill.type)}
                     <h3 className="text-xl font-semibold mt-4 mb-2">
-                      {drill.type === 'key' ? 'Key Drill' : 
-                       drill.type === 'word' ? 'Word Drill' : 
-                       'Paragraph Drill'}
+                      {drill.type === 'key' ? 'Key Drill' :
+                        drill.type === 'word' ? 'Word Drill' :
+                          'Paragraph Drill'}
                     </h3>
                     <p className="text-sm text-center text-muted-foreground">
                       {drill.type === 'key' ? 'Practice individual keys' :
-                       drill.type === 'word' ? 'Type common words' :
-                       'Master full sentences'}
+                        drill.type === 'word' ? 'Type common words' :
+                          'Master full sentences'}
                     </p>
-                    <Button 
-                      className="mt-4" 
-                      variant="outline" 
+                    <Button
+                      className="mt-4"
+                      variant="outline"
                       onClick={(e) => {
                         e.stopPropagation()
                         handleDrillSelect(drill)
@@ -172,25 +187,25 @@ export function LessonView({ lesson, onComplete, onNext, onPrevious }: LessonVie
       </Card>
       <div className="flex justify-between items-start mt-8">
         {lessons.findIndex(l => l.id === lesson.id) > 0 && (
-          <Button 
-            onClick={handlePreviousLesson} 
-            variant="outline" 
+          <Button
+            onClick={handlePreviousLesson}
+            variant="outline"
             className="flex items-center space-x-2 transition-all hover:bg-secondary"
           >
             <ChevronLeft className="h-4 w-4" />
             <span>Previous Lesson</span>
           </Button>
         )}
-        <Button 
-          onClick={() => router.push('/')} 
+        <Button
+          onClick={() => router.push('/')}
           variant="secondary"
           className="transition-all hover:bg-secondary-foreground hover:text-secondary"
         >
           Back to Lessons
         </Button>
         {lessons.findIndex(l => l.id === lesson.id) < lessons.length - 1 ? (
-          <Button 
-            onClick={handleNextLesson} 
+          <Button
+            onClick={handleNextLesson}
             variant="outline"
             className="flex items-center space-x-2 transition-all hover:bg-secondary"
           >
@@ -198,7 +213,7 @@ export function LessonView({ lesson, onComplete, onNext, onPrevious }: LessonVie
             <ChevronRight className="h-4 w-4" />
           </Button>
         ) : (
-          <div></div> 
+          <div></div>
         )}
       </div>
     </div>

@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { DrillControls } from "@/components/DrillControls"
-import { DrillConfigModal, DrillConfig } from "@/components/DrillConfigModal"
+import { DrillConfig } from "@/components/DrillConfigModal"
 import { ScoreScreen } from "@/components/ScoreScreen"
 
 interface ParagraphDrillProps {
@@ -13,7 +13,7 @@ interface ParagraphDrillProps {
   config: DrillConfig | null
 }
 
-export function ParagraphDrill({ text, onComplete, onCancel, config }: ParagraphDrillProps) {
+export function ParagraphDrill({ text, onCancel, config }: ParagraphDrillProps) {
   const [typedText, setTypedText] = useState('')
   const [isCorrect, setIsCorrect] = useState<boolean[]>([])
   const [wpm, setWpm] = useState(0)

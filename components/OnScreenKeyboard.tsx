@@ -20,7 +20,8 @@ export function OnScreenKeyboard({ currentKey = '', isMac }: OnScreenKeyboardPro
             const keyClass = `m-1 flex items-center justify-center rounded ${
               isHighlighted ? 'bg-primary text-primary-foreground ring-2 ring-offset-2 ring-primary' : 'bg-white dark:bg-gray-700 dark:text-white'
             }`
-            let keyStyle: React.CSSProperties = { minWidth: '40px', height: '40px' }
+            
+            const keyStyle: React.CSSProperties = { minWidth: '40px', height: '40px' }
             
             if (key === 'Space') {
               keyStyle.width = '200px'

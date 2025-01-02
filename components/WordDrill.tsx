@@ -1,9 +1,10 @@
+"use client"
+
 import React, { useState, useEffect, useCallback, useRef } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
 import { OnScreenKeyboard } from "@/components/OnScreenKeyboard"
 import { DrillControls } from "@/components/DrillControls"
-import { DrillConfigModal, DrillConfig } from "@/components/DrillConfigModal"
+import { DrillConfig } from "@/components/DrillConfigModal"
 import { ScoreScreen } from "@/components/ScoreScreen"
 import { generateWords } from "@/utils/wordGenerator"
 
@@ -14,7 +15,7 @@ interface WordDrillProps {
   config: DrillConfig | null
 }
 
-export function WordDrill({ words: initialWords, onComplete, onCancel, config }: WordDrillProps) {
+export function WordDrill({ words: initialWords, onCancel, config }: WordDrillProps) {
   const [words, setWords] = useState<string[]>(initialWords)
   const [currentWordIndex, setCurrentWordIndex] = useState(0)
   const [typedWord, setTypedWord] = useState('')
@@ -66,7 +67,7 @@ export function WordDrill({ words: initialWords, onComplete, onCancel, config }:
           setShowScoreScreen(true)
         } else {
           setProgress((elapsedTime / (config.duration * 60)) * 100)
-          
+
           const wordsTyped = currentWordIndex + (typedWord.length / 5)
           const currentWpm = Math.round((wordsTyped / elapsedTime) * 60)
           setWpm(currentWpm)
@@ -88,9 +89,9 @@ export function WordDrill({ words: initialWords, onComplete, onCancel, config }:
 
   const handleKeyPress = useCallback((event: KeyboardEvent) => {
     if (!isRunning || words.length === 0) return
-    
+
     event.preventDefault()
-    
+
     const key = event.key.toLowerCase()
     const currentWord = words[currentWordIndex]
     const nextCharIndex = typedWord.length
@@ -150,13 +151,12 @@ export function WordDrill({ words: initialWords, onComplete, onCancel, config }:
               return (
                 <div
                   key={colIndex}
-                  className={`text-3xl font-mono space-x-0 mr-8 ${
-                    isCurrentWord 
-                      ? 'text-primary' 
-                      : globalWordIndex < currentWordIndex
-                        ? 'text-green-500' 
-                        : 'text-muted-foreground'
-                  }`}
+                  className={`text-3xl font-mono space-x-0 mr-8 ${isCurrentWord
+                    ? 'text-primary'
+                    : globalWordIndex < currentWordIndex
+                      ? 'text-green-500'
+                      : 'text-muted-foreground'
+                    }`}
                 >
                   {word.split('').map((char, charIndex) => (
                     <span
@@ -168,8 +168,8 @@ export function WordDrill({ words: initialWords, onComplete, onCancel, config }:
                               ? 'text-green-500'
                               : 'text-red-500'
                             : charIndex === typedWord.length
-                            ? 'border-b-2 border-primary'
-                            : ''
+                              ? 'border-b-2 border-primary'
+                              : ''
                           : ''
                       }
                     >
@@ -219,7 +219,7 @@ export function WordDrill({ words: initialWords, onComplete, onCancel, config }:
           </div>
 
           <div className="mt-8">
-            <OnScreenKeyboard highlightedKey={highlightedKey} isMac={isMac} />
+            <OnScreenKeyboard currentKey={highlightedKey} isMac={isMac} />
           </div>
         </CardContent>
       </Card>

@@ -24,7 +24,7 @@ export function TypingCourseOverview() {
           </CardHeader>
           <CardContent>
             <Progress value={33} className="w-full h-2" />
-            <p className="mt-2 text-sm text-muted-foreground">Keep up the great work! You're making steady progress.</p>
+            <p className="mt-2 text-sm text-muted-foreground">Keep up the great work! You&apos;re making steady progress.</p>
           </CardContent>
         </Card>
 
@@ -87,7 +87,7 @@ export function TypingCourseOverview() {
                 </div>
                 <div className="flex-grow" />
                 <div className="flex justify-between items-center mt-4">
-                  <Badge variant={index < 4 ? "success" : "secondary"}>
+                  <Badge variant={index < 4 ? "default" : "secondary"}>
                     {index < 4 ? "Completed" : "Not Started"}
                   </Badge>
                   <Link href={`/lessons/${lesson.id}`} passHref>

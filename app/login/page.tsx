@@ -80,7 +80,7 @@ export default function Login() {
         </CardContent>
         <CardFooter className="flex flex-col space-y-2">
           <Button variant="link" asChild className="w-full">
-            <Link href="/signup">Don't have an account? Sign up</Link>
+            <Link href="/signup">Don&apos;t have an account? Sign up</Link>
           </Button>
           <Button variant="link" asChild className="w-full">
             <Link href="/forgot-password">Forgot your password?</Link>

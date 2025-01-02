@@ -1,12 +1,12 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { motion } from "framer-motion"
-import { Check, Star, Keyboard, Brain, Target, Trophy, Clock, Users, ChevronRight } from 'lucide-react'
+import { Check, Star, Keyboard, Brain, Target, Trophy, Users, ChevronRight } from 'lucide-react'
 
 export default function Home() {
   return (
@@ -234,7 +234,7 @@ export default function Home() {
                 <Card key={index} className="relative">
                   <CardContent className="pt-6">
                     <div className="flex items-center gap-4 mb-4">
-                      <img
+                      <Image
                         src={testimonial.image}
                         alt={testimonial.name}
                         className="rounded-full w-12 h-12"
@@ -277,7 +277,7 @@ export default function Home() {
               <div className="text-center mb-12">
                 <h2 className="text-2xl md:text-3xl font-bold mb-4">Get in Touch</h2>
                 <p className="text-muted-foreground">
-                  Have questions? We'd love to hear from you.
+                  Have questions? We&apos;d love to hear from you.
                 </p>
               </div>
 
