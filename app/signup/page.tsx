@@ -2,12 +2,14 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { SocialLoginButtons } from "@/components/social-login-buttons"
 import { Separator } from "@/components/ui/separator"
+import { Keyboard } from 'lucide-react'
 
 export default function Signup() {
   const [email, setEmail] = useState('')
@@ -41,44 +43,50 @@ export default function Signup() {
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-primary/10 via-background to-background p-4">
       <Card className="w-full max-w-md">
-        <CardHeader>
+        <CardHeader className="space-y-1">
+          <div className="flex items-center justify-center mb-2">
+            <Keyboard className="h-8 w-8 text-primary" />
+          </div>
           <CardTitle className="text-2xl font-bold text-center">Sign Up for Type It!</CardTitle>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
+            <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
               <Input
                 id="email"
                 type="email"
+                placeholder="your@email.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
               />
             </div>
-            <div>
+            <div className="space-y-2">
               <Label htmlFor="password">Password</Label>
               <Input
                 id="password"
                 type="password"
+                placeholder="••••••••"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
             </div>
-            <div>
+            <div className="space-y-2">
               <Label htmlFor="confirmPassword">Confirm Password</Label>
               <Input
                 id="confirmPassword"
                 type="password"
+                placeholder="••••••••"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 required
               />
             </div>
-            {error && <p className="text-red-500 mt-4">{error}</p>}
+            {error && <p className="text-sm text-destructive mt-2">{error}</p>}
             <Button type="submit" className="w-full">Sign Up</Button>
           </form>
           <div className="mt-6">
@@ -87,8 +95,8 @@ export default function Signup() {
           </div>
         </CardContent>
         <CardFooter className="justify-center">
-          <Button variant="link" onClick={() => router.push('/login')}>
-            Already have an account? Login
+          <Button variant="link" asChild>
+            <Link href="/login">Already have an account? Login</Link>
           </Button>
         </CardFooter>
       </Card>

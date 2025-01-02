@@ -2,12 +2,14 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { SocialLoginButtons } from "@/components/social-login-buttons"
 import { Separator } from "@/components/ui/separator"
+import { Keyboard } from 'lucide-react'
 
 export default function Login() {
   const [email, setEmail] = useState('')
@@ -36,34 +38,39 @@ export default function Login() {
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-primary/10 via-background to-background p-4">
       <Card className="w-full max-w-md">
-        <CardHeader>
+        <CardHeader className="space-y-1">
+          <div className="flex items-center justify-center mb-2">
+            <Keyboard className="h-8 w-8 text-primary" />
+          </div>
           <CardTitle className="text-2xl font-bold text-center">Login to Type It!</CardTitle>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
+            <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
               <Input
                 id="email"
                 type="email"
+                placeholder="your@email.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
               />
             </div>
-            <div>
+            <div className="space-y-2">
               <Label htmlFor="password">Password</Label>
               <Input
                 id="password"
                 type="password"
+                placeholder="••••••••"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
             </div>
-            {error && <p className="text-red-500 mt-4">{error}</p>}
+            {error && <p className="text-sm text-destructive mt-2">{error}</p>}
             <Button type="submit" className="w-full">Login</Button>
           </form>
           <div className="mt-6">
@@ -72,11 +79,11 @@ export default function Login() {
           </div>
         </CardContent>
         <CardFooter className="flex flex-col space-y-2">
-          <Button variant="link" onClick={() => router.push('/signup')} className="w-full">
-            Don't have an account? Sign up
+          <Button variant="link" asChild className="w-full">
+            <Link href="/signup">Don't have an account? Sign up</Link>
           </Button>
-          <Button variant="link" onClick={() => router.push('/forgot-password')} className="w-full">
-            Forgot your password?
+          <Button variant="link" asChild className="w-full">
+            <Link href="/forgot-password">Forgot your password?</Link>
           </Button>
         </CardFooter>
       </Card>

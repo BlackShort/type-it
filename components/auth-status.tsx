@@ -3,9 +3,6 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { Button } from "@/components/ui/button"
-import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuItem } from "@/components/ui/dropdown-menu"
-import Image from 'next/image'
-import user from '@/assets/user.jpeg'
 
 export function AuthStatus() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -25,29 +22,10 @@ export function AuthStatus() {
 
   if (isLoggedIn) {
     return (
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button variant="outline" size="icon" className="rounded-full">
-            <Image
-              src={user}
-              width="32"
-              height="32"
-              className="rounded-full"
-              alt="Avatar"
-              style={{ aspectRatio: "32/32", objectFit: "cover" }}
-            />
-            <span className="sr-only">Toggle user menu</span>
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align="end">
-          <DropdownMenuLabel>My Account</DropdownMenuLabel>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem>Profile</DropdownMenuItem>
-          <DropdownMenuItem>Settings</DropdownMenuItem>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem onClick={handleLogout}>Logout</DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
+      <div className="flex items-center space-x-4">
+        <span className="text-sm text-gray-600 dark:text-gray-300">Logged In</span>
+        <Button variant="outline" onClick={handleLogout}>Logout</Button>
+      </div>
     )
   }
 

@@ -2,260 +2,320 @@ import Link from 'next/link'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { ThemeToggle } from "@/components/theme-toggle"
-import { AuthStatus } from "@/components/auth-status"
-import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table"
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
-
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { motion } from "framer-motion"
+import { Check, Star, Keyboard, Brain, Target, Trophy, Clock, Users, ChevronRight } from 'lucide-react'
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col bg-background dark:bg-background">
-      <header className="bg-[var(--card)] dark:bg-[var(--card)] shadow-sm sticky top-0 z-10 backdrop-blur-md">
-        <nav className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-[var(--primary)] dark:text-[var(--primary)]">Type It!</h1>
-          <div className="space-x-4">
-            <Link href="/" className="text-foreground dark:text-foreground hover:text-primary dark:hover:text-primary">Home</Link>
-            <Link href="#about" className="text-foreground dark:text-foreground hover:text-primary dark:hover:text-primary">About</Link>
-            <Link href="#features" className="text-foreground dark:text-foreground hover:text-primary dark:hover:text-primary">Features</Link>
-            <Link href="#pricing" className="text-foreground dark:text-foreground hover:text-primary dark:hover:text-primary">Pricing</Link>
-            <Link href="#contact" className="text-foreground dark:text-foreground hover:text-primary dark:hover:text-primary">Contact</Link>
-          </div>
-          <div className="flex items-center space-x-4">
-            <ThemeToggle />
-            <AuthStatus />
-          </div>
-        </nav>
-      </header>
-
+    <div className="min-h-screen flex flex-col bg-background">
       <main className="flex-grow">
-        <section className="py-12 md:py-24 bg-gradient-to-r from-primary to-primary/80">
-          <div className="container mx-auto px-4 text-center text-primary-foreground">
-            <h1 className="text-4xl md:text-6xl font-bold mb-4">Unleash Your Typing Potential</h1>
-            <p className="text-lg md:text-xl mb-8">
-              Improve your typing speed and accuracy with our interactive typing playground and comprehensive tutorials.
-            </p>
-            <div className="flex justify-center gap-4">
-              <Link
-                href="/"
-                className="inline-flex items-center justify-center h-10 px-6 rounded-md bg-primary-foreground text-primary font-medium transition-colors hover:bg-primary hover:text-primary-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
-                prefetch={false}
-              >
-                Learn More
-              </Link>
-              <Link
-                href="/playground"
-                className="inline-flex items-center justify-center h-10 px-6 rounded-md border border-primary-foreground text-primary-foreground font-medium transition-colors hover:bg-primary-foreground hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
-                prefetch={false}
-              >
-                Try Now
-              </Link>
-            </div>
-          </div>
-        </section>
-
-        <section id="about" className="py-20 bg-[var(--card)] dark:bg-[var(--card)]">
-          <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold mb-8 text-center text-foreground dark:text-foreground">About Type It!</h2>
-            <div className="max-w-3xl mx-auto text-center">
-              <p className="text-lg mb-4 text-foreground dark:text-foreground">
-                Type It! is a cutting-edge typing tutor designed to help you improve your typing speed and accuracy.
-                Whether you're a beginner looking to learn touch typing or an experienced typist aiming to boost your
-                words per minute, our platform offers personalized lessons and engaging exercises to meet your goals.
-              </p>
-              <p className="text-lg text-foreground dark:text-foreground">
-                Founded by a team of passionate developers and educators, Type It! combines the latest in educational
-                technology with proven typing techniques to deliver an unparalleled learning experience.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        <section id="features" className="py-20 bg-[var(--muted)] dark:bg-[var(--muted)]">
-          <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold mb-8 text-center text-foreground dark:text-foreground">Features</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {[
-                { title: 'Interactive Lessons', description: 'Engaging, step-by-step lessons tailored to your skill level.' },
-                { title: 'Real-Time Progress Tracking', description: 'Monitor your WPM, accuracy, and improvement over time.' },
-                { title: 'Customizable Practice Sessions', description: 'Create your own drills focusing on problem areas.' },
-                { title: 'Typing Games', description: 'Fun, competitive games to make learning enjoyable.' },
-                { title: 'Detailed Analytics', description: 'In-depth insights into your typing patterns and areas for improvement.' },
-                { title: 'Multi-language Support', description: 'Practice typing in multiple languages and keyboard layouts.' }
-              ].map((feature, index) => (
-                <div key={index} className="bg-[var(--card)] dark:bg-[var(--card)] p-6 rounded-lg shadow-md">
-                  <h3 className="text-xl font-semibold mb-2 text-foreground dark:text-foreground">{feature.title}</h3>
-                  <p className="text-foreground dark:text-foreground">{feature.description}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section id="pricing" className="py-20 bg-[var(--card)] dark:bg-[var(--card)]">
-          <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold mb-8 text-center text-foreground dark:text-foreground">Pricing Plans</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {[
-                { name: 'Basic', price: 'Free', features: ['Access to basic lessons', 'Limited progress tracking', 'Standard typing tests'] },
-                { name: 'Pro', price: '$9.99/month', features: ['All basic features', 'Advanced lessons', 'Detailed analytics', 'Custom practice sessions'] },
-                { name: 'Enterprise', price: 'Contact Us', features: ['All pro features', 'Team management', 'API access', 'Dedicated support'] }
-              ].map((plan, index) => (
-                <div key={index} className="bg-[var(--card)] dark:bg-[var(--card)] p-6 rounded-lg shadow-md flex flex-col">
-                  <h3 className="text-2xl font-semibold mb-2 text-foreground dark:text-foreground">{plan.name}</h3>
-                  <p className="text-3xl font-bold mb-4 text-[var(--primary)] dark:text-[var(--primary)]">{plan.price}</p>
-                  <ul className="mb-6 flex-grow">
-                    {plan.features.map((feature, fIndex) => (
-                      <li key={fIndex} className="mb-2 flex items-center text-foreground dark:text-foreground">
-                        <svg className="w-4 h-4 mr-2 text-[var(--primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                        </svg>
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                  <Button className="mt-auto" variant={index === 1 ? "default" : "outline"}>
-                    {index === 2 ? "Contact Sales" : "Get Started"}
+        {/* Hero Section */}
+        <section className="relative overflow-hidden">
+          {/* Background Pattern */}
+          <div className="absolute inset-0 bg-grid-white/10 bg-grid-pattern" />
+          
+          <div className="relative bg-gradient-to-b from-primary/10 via-background to-background pt-20 pb-32">
+            <div className="container mx-auto px-4">
+              <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
+                <Badge variant="secondary" className="mb-4">
+                  ⌨️ The Ultimate Typing Tutor
+                </Badge>
+                <h1 className="text-3xl md:text-4xl lg:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/60">
+                  Master Touch Typing with Precision & Speed
+                </h1>
+                <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl">
+                  Join thousands of users who have transformed their typing skills. Interactive lessons, real-time feedback, and personalized practice sessions.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4 mb-12">
+                  <Button size="lg" asChild className="text-lg">
+                    <Link href="/playground">Start Typing Now</Link>
+                  </Button>
+                  <Button size="lg" variant="outline" className="text-lg">
+                    View Demo
                   </Button>
                 </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section id="contact" className="py-20 bg-[var(--muted)] dark:bg-[var(--muted)]">
-          <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold mb-8 text-center text-foreground dark:text-foreground">Contact Us</h2>
-            <div className="max-w-lg mx-auto">
-              <form className="space-y-4">
-                <div>
-                  <Label htmlFor="name" className="text-foreground dark:text-foreground">Name</Label>
-                  <Input id="name" type="text" placeholder="Your Name" required />
+                <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-8 text-muted-foreground">
+                  <div className="flex items-center gap-2">
+                    <Users className="h-5 w-5" />
+                    <span>10K+ Users</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Star className="h-5 w-5 text-yellow-500" />
+                    <span>4.9/5 Rating</span>
+                  </div>
                 </div>
-                <div>
-                  <Label htmlFor="email" className="text-foreground dark:text-foreground">Email</Label>
-                  <Input id="email" type="email" placeholder="your@email.com" required />
-                </div>
-                <div>
-                  <Label htmlFor="message" className="text-foreground dark:text-foreground">Message</Label>
-                  <textarea
-                    id="message"
-                    rows={4}
-                    className="w-full p-3 rounded-md border border-[var(--border)] focus:outline-none focus:ring-2 focus:ring-[var(--ring)] dark:bg-[var(--input)] dark:border-[var(--border)] dark:text-foreground"
-                    placeholder="Your message here..."
-                    required
-                  ></textarea>
-                </div>
-                <Button type="submit" className="w-full">Send Message</Button>
-              </form>
-            </div>
-          </div>
-        </section>
-
-        <section className="py-12 md:py-24 bg-muted">
-          <div className="container mx-auto px-4">
-            <h2 className="text-3xl md:text-4xl font-bold mb-8">Typing Leaderboard</h2>
-            <div className="bg-card rounded-lg shadow-md p-6">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-2xl font-bold">Top Typists</h3>
-                <Link href="#" className="text-sm font-medium text-primary hover:underline" prefetch={false}>
-                  View Leaderboard
-                </Link>
               </div>
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Rank</TableHead>
-                    <TableHead>Username</TableHead>
-                    <TableHead>WPM</TableHead>
-                    <TableHead>Accuracy</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  <TableRow>
-                    <TableCell>1</TableCell>
-                    <TableCell>
-                      <div className="flex items-center gap-2">
-                        <Avatar className="w-6 h-6 border">
-                          <AvatarImage src="/placeholder-user.jpg" alt="Image" />
-                          <AvatarFallback>JD</AvatarFallback>
-                        </Avatar>
-                        <span>JohnDoe</span>
-                      </div>
-                    </TableCell>
-                    <TableCell>145</TableCell>
-                    <TableCell>99%</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell>2</TableCell>
-                    <TableCell>
-                      <div className="flex items-center gap-2">
-                        <Avatar className="w-6 h-6 border">
-                          <AvatarImage src="/placeholder-user.jpg" alt="Image" />
-                          <AvatarFallback>SM</AvatarFallback>
-                        </Avatar>
-                        <span>SarahMiller</span>
-                      </div>
-                    </TableCell>
-                    <TableCell>138</TableCell>
-                    <TableCell>97%</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell>3</TableCell>
-                    <TableCell>
-                      <div className="flex items-center gap-2">
-                        <Avatar className="w-6 h-6 border">
-                          <AvatarImage src="/placeholder-user.jpg" alt="Image" />
-                          <AvatarFallback>MJ</AvatarFallback>
-                        </Avatar>
-                        <span>MichaelJackson</span>
-                      </div>
-                    </TableCell>
-                    <TableCell>132</TableCell>
-                    <TableCell>95%</TableCell>
-                  </TableRow>
-                </TableBody>
-              </Table>
             </div>
           </div>
         </section>
 
-        <section id="testimonials" className="py-20 bg-[var(--card)] dark:bg-[var(--card)]">
+        {/* Features Section */}
+        <section className="py-24 bg-secondary/30">
           <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold mb-8 text-center text-foreground dark:text-foreground">What Our Users Say</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="text-center mb-16">
+              <h2 className="text-2xl md:text-3xl font-bold mb-4">Why Choose Type It!</h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto">
+                Our comprehensive platform offers everything you need to become a typing expert
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {[
-                { name: 'John Doe', text: 'Type It! has significantly improved my typing speed. Highly recommended!' },
-                { name: 'Jane Smith', text: 'The interactive lessons and games make learning to type fun and engaging.' },
-                { name: 'Mike Johnson', text: 'As a programmer, Type It! helped me become more efficient in my daily work.' },
-                { name: 'Emily Brown', text: 'The progress tracking feature keeps me motivated to improve every day.' }
-              ].map((testimonial, index) => (
-                <div key={index} className="bg-[var(--card)] dark:bg-[var(--card)] p-6 rounded-lg shadow-md">
-                  <p className="text-foreground dark:text-foreground mb-4">"{testimonial.text}"</p>
-                  <p className="font-semibold text-foreground dark:text-foreground">{testimonial.name}</p>
+                {
+                  icon: Keyboard,
+                  title: "Interactive Lessons",
+                  description: "Step-by-step lessons tailored to your skill level"
+                },
+                {
+                  icon: Brain,
+                  title: "Smart Learning",
+                  description: "AI-powered system adapts to your learning pace"
+                },
+                {
+                  icon: Target,
+                  title: "Precision Focus",
+                  description: "Real-time feedback for accuracy improvement"
+                },
+                {
+                  icon: Trophy,
+                  title: "Achievement System",
+                  description: "Earn badges and track your progress"
+                }
+              ].map((feature, index) => (
+                <Card key={index} className="relative overflow-hidden group">
+                  <CardHeader>
+                    <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+                      <feature.icon className="h-6 w-6 text-primary" />
+                    </div>
+                    <CardTitle>{feature.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-muted-foreground">{feature.description}</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Statistics Section */}
+        <section className="py-24">
+          <div className="container mx-auto px-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+              {[
+                { number: "50M+", label: "Characters Typed" },
+                { number: "100K+", label: "Lessons Completed" },
+                { number: "95%", label: "Success Rate" }
+              ].map((stat, index) => (
+                <div key={index} className="text-center">
+                  <h3 className="text-3xl md:text-4xl font-bold text-primary mb-2">{stat.number}</h3>
+                  <p className="text-muted-foreground">{stat.label}</p>
                 </div>
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Pricing Section */}
+        <section className="py-24 bg-secondary/30">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-16">
+              <h2 className="text-2xl md:text-3xl font-bold mb-4">Simple, Transparent Pricing</h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto">
+                Choose the perfect plan for your typing journey
+              </p>
+            </div>
+
+            <Tabs defaultValue="monthly" className="w-full max-w-5xl mx-auto">
+              <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 mb-12">
+                <TabsTrigger value="monthly">Monthly Billing</TabsTrigger>
+                <TabsTrigger value="yearly">Yearly Billing</TabsTrigger>
+              </TabsList>
+              <TabsContent value="monthly">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                  {[
+                    {
+                      name: "Basic",
+                      price: "Free",
+                      description: "Perfect for beginners",
+                      features: ["Basic lessons", "Progress tracking", "Standard typing tests"]
+                    },
+                    {
+                      name: "Pro",
+                      price: "$9.99/mo",
+                      description: "Most popular choice",
+                      features: ["All basic features", "Advanced lessons", "Detailed analytics", "Custom practice sessions"]
+                    },
+                    {
+                      name: "Enterprise",
+                      price: "Custom",
+                      description: "For teams & organizations",
+                      features: ["All pro features", "Team management", "API access", "Dedicated support"]
+                    }
+                  ].map((plan, index) => (
+                    <Card key={index} className={`relative ${index === 1 ? 'border-primary shadow-lg md:scale-105' : ''}`}>
+                      {index === 1 && (
+                        <div className="absolute -top-4 left-1/2 -translate-x-1/2">
+                          <Badge variant="secondary">Most Popular</Badge>
+                        </div>
+                      )}
+                      <CardHeader>
+                        <CardTitle className="text-xl md:text-2xl">{plan.name}</CardTitle>
+                        <div className="mt-4">
+                          <span className="text-3xl md:text-4xl font-bold">{plan.price}</span>
+                          {plan.price !== "Free" && plan.price !== "Custom" && (
+                            <span className="text-muted-foreground ml-2">/month</span>
+                          )}
+                        </div>
+                        <p className="text-muted-foreground">{plan.description}</p>
+                      </CardHeader>
+                      <CardContent>
+                        <ul className="space-y-4">
+                          {plan.features.map((feature, fIndex) => (
+                            <li key={fIndex} className="flex items-center gap-2">
+                              <Check className="h-5 w-5 text-primary" />
+                              <span>{feature}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </CardContent>
+                      <CardFooter>
+                        <Button className="w-full" variant={index === 1 ? "default" : "outline"}>
+                          {index === 2 ? "Contact Sales" : "Get Started"}
+                        </Button>
+                      </CardFooter>
+                    </Card>
+                  ))}
+                </div>
+              </TabsContent>
+              <TabsContent value="yearly">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                  {/* Similar structure as monthly, but with yearly prices */}
+                </div>
+              </TabsContent>
+            </Tabs>
+          </div>
+        </section>
+
+        {/* Testimonials Section */}
+        <section className="py-24">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-16">
+              <h2 className="text-2xl md:text-3xl font-bold mb-4">What Our Users Say</h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto">
+                Join thousands of satisfied users who have improved their typing skills
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {[
+                {
+                  name: "Sarah Johnson",
+                  role: "Software Developer",
+                  image: "/placeholder.svg?height=80&width=80",
+                  content: "Type It! has significantly improved my coding speed. The interactive lessons and real-time feedback are fantastic!"
+                },
+                {
+                  name: "Michael Chen",
+                  role: "Content Writer",
+                  image: "/placeholder.svg?height=80&width=80",
+                  content: "As a writer, typing speed is crucial. This platform helped me increase my WPM from 60 to 90 in just two months."
+                },
+                {
+                  name: "Emily Brown",
+                  role: "Student",
+                  image: "/placeholder.svg?height=80&width=80",
+                  content: "The gamified approach makes learning fun. I actually look forward to my daily typing practice now!"
+                }
+              ].map((testimonial, index) => (
+                <Card key={index} className="relative">
+                  <CardContent className="pt-6">
+                    <div className="flex items-center gap-4 mb-4">
+                      <img
+                        src={testimonial.image}
+                        alt={testimonial.name}
+                        className="rounded-full w-12 h-12"
+                      />
+                      <div>
+                        <h4 className="font-semibold">{testimonial.name}</h4>
+                        <p className="text-sm text-muted-foreground">{testimonial.role}</p>
+                      </div>
+                    </div>
+                    <p className="text-muted-foreground">{testimonial.content}</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section className="py-24 bg-primary text-primary-foreground">
+          <div className="container mx-auto px-4">
+            <div className="text-center max-w-3xl mx-auto">
+              <h2 className="text-2xl md:text-3xl font-bold mb-4">Ready to Improve Your Typing Skills?</h2>
+              <p className="text-primary-foreground/80 mb-8">
+                Join thousands of users who have already transformed their typing speed and accuracy
+              </p>
+              <Button size="lg" variant="secondary" asChild>
+                <Link href="/playground" className="text-lg">
+                  Get Started Now
+                  <ChevronRight className="ml-2 h-5 w-5" />
+                </Link>
+              </Button>
+            </div>
+          </div>
+        </section>
+
+        {/* Contact Section */}
+        <section className="py-24">
+          <div className="container mx-auto px-4">
+            <div className="max-w-2xl mx-auto">
+              <div className="text-center mb-12">
+                <h2 className="text-2xl md:text-3xl font-bold mb-4">Get in Touch</h2>
+                <p className="text-muted-foreground">
+                  Have questions? We'd love to hear from you.
+                </p>
+              </div>
+
+              <Card>
+                <CardContent className="pt-6">
+                  <form className="space-y-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div>
+                        <Label htmlFor="name">Name</Label>
+                        <Input id="name" placeholder="Your name" />
+                      </div>
+                      <div>
+                        <Label htmlFor="email">Email</Label>
+                        <Input id="email" type="email" placeholder="your@email.com" />
+                      </div>
+                    </div>
+                    <div>
+                      <Label htmlFor="subject">Subject</Label>
+                      <Input id="subject" placeholder="How can we help?" />
+                    </div>
+                    <div>
+                      <Label htmlFor="message">Message</Label>
+                      <textarea
+                        id="message"
+                        rows={4}
+                        className="w-full min-h-[120px] rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                        placeholder="Your message here..."
+                      />
+                    </div>
+                    <Button type="submit" className="w-full">Send Message</Button>
+                  </form>
+                </CardContent>
+              </Card>
             </div>
           </div>
         </section>
       </main>
-
-      <footer className="bg-background/80 backdrop-blur-sm shadow-sm">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <p className="text-sm text-muted-foreground">&copy; 2024 Typing Mastery. All rights reserved.</p>
-          <nav className="flex items-center gap-4">
-            <Link href="#" className="text-sm font-medium hover:text-primary" prefetch={false}>
-              Privacy
-            </Link>
-            <Link href="#" className="text-sm font-medium hover:text-primary" prefetch={false}>
-              Terms
-            </Link>
-            <Link href="#" className="text-sm font-medium hover:text-primary" prefetch={false}>
-              Contact
-            </Link>
-          </nav>
-        </div>
-      </footer>
     </div>
   )
 }
+
